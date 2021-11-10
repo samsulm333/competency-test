@@ -1,0 +1,26 @@
+{
+  "name": "competency-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsulm333/competency-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samsulm333/competency-test/issues"
+  },
+  "homepage": "https://github.com/samsulm333/competency-test#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "hbs": "^4.1.2",
+    "multer": "^1.4.3",
+    "mysql2": "^2.3.3-rc.0"
+  }
+}
