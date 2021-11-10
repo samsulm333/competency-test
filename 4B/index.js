@@ -46,6 +46,7 @@ app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 const dbConnection = require("./connection/db");
 const uploadFile = require("./middleware/uploadFile");
+const { Console } = require("console");
 
 const pathFile = "../public/uploads/";
 
@@ -69,11 +70,12 @@ app.get("/", (req, res) => {
           photo: pathFile + result.photo,
         });
       }
-      console.log(results);
+
       res.render("index", {
         provinces: req.session.provinces,
       });
     });
+    conn.release();
   });
 });
 
@@ -99,6 +101,7 @@ app.get("/provinsi-detail/:id", (req, res) => {
         provinsi,
       });
     });
+    conn.release();
   });
 });
 
@@ -126,6 +129,7 @@ app.get("/provinsi", (req, res) => {
         provinces: req.session.provinces,
       });
     });
+    conn.release();
   });
 });
 
@@ -165,6 +169,7 @@ app.post("/add-provinsi", uploadFile("image"), (req, res) => {
       };
       res.redirect("/add-provinsi");
     });
+    conn.release();
   });
 });
 
@@ -178,8 +183,6 @@ app.get("/edit-provinsi/:id", (req, res) => {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      console.log(results);
-
       let provinsi = {
         id: results[0].id,
         nama: results[0].nama,
@@ -191,6 +194,7 @@ app.get("/edit-provinsi/:id", (req, res) => {
         provinsi,
       });
     });
+    conn.release();
   });
 });
 app.post("/edit-provinsi/:id", (req, res) => {
@@ -212,8 +216,10 @@ app.post("/edit-provinsi/:id", (req, res) => {
 
       res.redirect(`/edit-provinsi/${id}`);
     });
+    conn.release();
   });
 });
+
 app.get("/delete-provinsi/:id", (req, res) => {
   const id = req.params.id;
   const query = `DELETE FROM provinsi_tb WHERE id = ${id}`;
@@ -228,6 +234,7 @@ app.get("/delete-provinsi/:id", (req, res) => {
       };
       res.redirect("/provinsi");
     });
+    conn.release();
   });
 });
 
@@ -256,8 +263,10 @@ app.get("/kabupaten", (req, res) => {
         message: req.session.message,
       });
     });
+    conn.release();
   });
 });
+
 app.get("/add-kabupaten", (req, res) => {
   let query = `SELECT id, nama  FROM provinsi_tb`;
 
@@ -278,14 +287,13 @@ app.get("/add-kabupaten", (req, res) => {
         provinces: req.session.provinces,
       });
     });
+    conn.release();
   });
 });
 
 app.post("/add-kabupaten", uploadFile("image"), (req, res) => {
   let { nama, provinsi, diresmikan } = req.body;
   let image = "";
-
-  console.log(req.body);
 
   if (req.file) {
     image = req.file.filename;
@@ -313,12 +321,13 @@ app.post("/add-kabupaten", uploadFile("image"), (req, res) => {
       };
       res.redirect("/add-kabupaten");
     });
+    conn.release();
   });
 });
 
 app.get("/edit-kabupaten/:id", (req, res) => {
   let id = req.params.id;
-  let query = `SELECT * FROM kabupaten_tb WHERE id = "${id}""`;
+  let query = `SELECT * FROM kabupaten_tb WHERE id = "${id}"`;
 
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;
@@ -337,14 +346,16 @@ app.get("/edit-kabupaten/:id", (req, res) => {
         kabupaten,
       });
     });
+    conn.release();
   });
 });
+
 app.post("/edit-kabupaten/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const { nama, diresmikan, image } = req.body;
 
-  const query = `UPDATE tb_kabupaten SET name="${nama}", diresmikan="${diresmikan}", photo="${image}" WHERE id= ${id}`;
-
+  const query = `UPDATE kabupaten_tb SET nama="${nama}", diresmikan="${diresmikan}", photo="${image}" WHERE id= ${id}`;
+  console.log(req.body);
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;
 
@@ -358,6 +369,7 @@ app.post("/edit-kabupaten/:id", (req, res) => {
 
       res.redirect(`/edit-kabupaten/${id}`);
     });
+    conn.release();
   });
 });
 
@@ -375,6 +387,7 @@ app.get("/delete-kabupaten/:id", (req, res) => {
       };
       res.redirect("/kabupaten");
     });
+    conn.release();
   });
 });
 
