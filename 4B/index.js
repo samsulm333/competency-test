@@ -333,7 +333,7 @@ app.get("/edit-kabupaten/:id", (req, res) => {
         photo: results[0].photo,
       };
 
-      res.render(`/edit-kabupaten/${id}`, {
+      res.render("kabupatenEdit", {
         kabupaten,
       });
     });
@@ -356,7 +356,7 @@ app.post("/edit-kabupaten/:id", (req, res) => {
         message: "Edit Successfully",
       };
 
-      res.redirect("kabupatenEdit");
+      res.redirect(`/edit-kabupaten/${id}`);
     });
   });
 });
