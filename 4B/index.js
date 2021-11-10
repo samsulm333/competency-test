@@ -318,7 +318,7 @@ app.post("/add-kabupaten", uploadFile("image"), (req, res) => {
 
 app.get("/edit-kabupaten/:id", (req, res) => {
   let id = req.params.id;
-  let query = `SELECT * FROM kabupaten_tb WHERE id = ${id}`;
+  let query = `SELECT * FROM kabupaten_tb WHERE id = "${id}""`;
 
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;
@@ -333,7 +333,7 @@ app.get("/edit-kabupaten/:id", (req, res) => {
         photo: results[0].photo,
       };
 
-      res.render("kabupatenEdit", {
+      res.render(`/edit-kabupaten/${id}`, {
         kabupaten,
       });
     });
