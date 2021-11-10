@@ -1,0 +1,45 @@
+{{> header}}
+{{> navbar}}
+
+<h3 class="form-title text-center mt-2">Insert Provinsi</h3>
+<div class=" mt-2">
+  <form class="form-group was-validated w-100" action="/add-provinsi" method="post" enctype="multipart/form-data">
+   
+
+  </div>
+  {{#if message}}
+      <div class="alert alert-{{message.type}} w-75 form-input-group" role="alert">
+      {{message.message}}
+      </div>
+   {{/if}}
+  <div class="form-input-group mb-3">
+    <label for="namaProvinsi" class="form-label">Nama Provinsi</label>
+    <input type="text" class="form-control is-invalid w-75" id="namaProvinsi" name="nama" required></input>
+  </div>
+
+  <div class="inline-form form-input-group mb-3">
+    <div>
+        <label for="diresmikan" class="form-label">Tanggal Diresmikan</label>
+        <input type="date" class="form-control is-invalid" id="diresmikan" name="diresmikan" required></input>
+    </div>
+
+   
+    <div class="form-pulau mb-3">
+        <label for="pulau" class="form-label">Nama Pulau</label>
+        <input type="text" class="form-control is-invalid" id="namaProvinsi" name="pulau" required></input>
+    </div>
+
+  </div>
+  
+  <div class="form-input-group mb-3">
+    <label for="photo" class="form-label">Photo</label>
+    <input type="file" class="form-control is-invalid w-75" id="photo" name="image" required></input>
+  </div>
+  
+  <div class="mb-3 ">
+    <button class="btn btn-primary mt-2 w-50 position-relative bottom-0 start-50 translate-middle-x" type="submit">Add Provinsi</button>
+  </div>
+</form></div>
+
+
+{{> footer}}

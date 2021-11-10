@@ -1,0 +1,33 @@
+{{> pageMenu}}
+
+        <h3 class="text-center mt-2" style="color: white;">Provinsi</h3>
+        <a href="/add-provinsi" type="button" class="add btn btn-primary ms-4 mt-2 mb-2">+ Add Provinsi</a>
+        <table class="table table-hover ms-3 text-center" style="background: white;">
+        <tr>
+            <th>No</th>
+            <th>Image</th>
+            <th>Nama Provinsi</th>
+            <th>Tanggal Diresmikan</th>  
+            <th>Pulau</th> 
+            <th>Action</th> 
+        </tr>
+        {{#each provinces}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td><img src="{{this.photo}}" style="width: 30px; height: 30px"></td>
+            <td>{{this.nama}}</td>
+            <td>{{this.diresmikan}}</td>
+            <td>{{this.pulau}}</td>
+            <td>
+            <a href="/edit-provinsi/{{this.id}}" type="button" class="btn btn-primary me-1">Edit</a>
+            <a href="/delete-provinsi/{{this.id}}" type="button" class="btn btn-danger">Delete</a>
+            </td> 
+        </tr>
+        {{/ each}}
+        
+        </table>
+    </div>
+</div>
+
+
+{{> footer}}

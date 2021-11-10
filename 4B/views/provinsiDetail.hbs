@@ -1,0 +1,27 @@
+{{> header}}
+{{> navbar}}
+
+
+
+{{#with provinsi}}
+
+<div class="provinsi-detail container mt-3 ms-3" style="color: white;">
+   
+    <div>
+        <img src="{{this.photo}}"  class="provinsi-detail-img mx-auto d-block">
+    </div>
+     <div >
+        <h2>{{this.nama}}</h2>
+    </div>
+
+    <div class="mt-3">
+        <p>Diresmikan : {{this.diresmikan}} </p>
+        <p>Pulau : {{this.pulau}}</p>
+    </div>
+{{/with}}
+
+</div>
+
+
+
+{{> footer}}
